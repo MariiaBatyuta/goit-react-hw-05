@@ -1,0 +1,65 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.movieInfo{
+    display: flex;
+}
+
+.goBackButton {
+    padding: 8px;
+    margin: 24px 0 8px 0;
+}
+
+.goBackButton:hover {
+    color: red;
+    text-shadow: 0 1px 2px gray;
+}
+
+
+.posterContainer img{
+    flex-shrink: 0;
+    max-width: 400px;
+    max-height: 600px;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    text-align: left;
+    padding-left: 16px;
+}
+
+.details h3 {
+    margin: 0;
+}
+
+.details ul {
+    text-decoration: none;
+    margin: 0 0 12px 0;
+    padding-left: 12px;
+}
+
+.details li {
+    list-style: none;
+}
+
+.details li:hover {
+    color: red;
+    text-shadow: 0 1px 2px gray;
+    cursor: pointer;
+
+}
+
+.line {
+    border-bottom: 1px solid grey;
+    box-shadow: 0 4px 8px rgba(94, 93, 93, 0.2);
+    margin-bottom: 8px;
+    z-index: 100;
+}
+
+

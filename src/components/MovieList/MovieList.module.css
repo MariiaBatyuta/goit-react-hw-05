@@ -1,0 +1,13 @@
+.list {
+    margin-left: 8px;
+    text-align: left;
+    list-style: none;
+    padding-left: 0;
+}
+
+.list:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    color: red;
+    text-shadow: 0 1px 2px gray;
+}

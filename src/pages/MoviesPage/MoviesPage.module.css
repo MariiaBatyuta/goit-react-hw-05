@@ -1,0 +1,47 @@
+.searchForm {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    margin-left: 12px;
+    gap: 12px;
+    z-index: 100;
+    background-color: white;
+}
+
+.input {
+    width: 320px;
+    height: 24px;
+    padding: 4px 8px;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    background-color: rgb(203, 192, 192);
+    height: 32px;
+    padding: 8px;
+}
+
+.button:hover {
+    color: red;
+    text-shadow: 0 2px 4px black;
+    border: 1px solid black;
+}
+
+.resultContainer {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: white;
+    margin: 100px 0 0 24px;
+}
+
+.resultContainer ul{
+    padding: 0;
+}
