@@ -1,47 +1,32 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getMovieById } from "../../components/axiosAPI"; 
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet, useParams, useLocation, Link } from "react-router-dom";
 import css from './MovieDetailsPage.module.css';
-import MovieCast from "../../components/MovieCast/MovieCast";
-import MovieReviews from "../../components/MovieReviews/MovieReviews";
 import Loader from "../../components/Loader/Loader";
 
 const baseUrl = "https://image.tmdb.org/t/p/w500";
 
 export default function MovieDetailsPage() {
-    const location = useLocation();
+    const { id } = useParams();
     const [selectedMovie, setSelectedMovie] = useState(null);
-    const [movieId, setMovieId] = useState(null); 
-
     const [showCast, setShowCast] = useState(false);
     const [showReviews, setShowReviews] = useState(false);
-
-    const prevUrlRef = useRef(null);
-
-    useEffect(() => {
-        if (location.state) {
-            setMovieId(location.state);
-        }
-    }, [location.state]);
+    const location = useLocation();
 
     useEffect(() => {
         async function fetchMovie() {
             try {
-                const movieData = await getMovieById(movieId);
+                const movieData = await getMovieById(id);
                 setSelectedMovie(movieData);
             } catch (error) {
                 console.error(error);
             }
         }
 
-        if (movieId) {
+        if (id) {
             fetchMovie();
         }
-    }, [movieId]);
-
-    useEffect(() => {
-        prevUrlRef.current = window.location.href;
-    }, []);
+    }, [id]);
 
     const handleToggleCast = () => {
         setShowCast(!showCast);
@@ -53,24 +38,16 @@ export default function MovieDetailsPage() {
         setShowCast(false); 
     };
 
-
-  const handleGoBack = () => {
-    if (showCast || showReviews) {
-        setShowCast(false);
-        setShowReviews(false);
-        window.history.back();
-        window.history.back();
-    } else {
-        window.history.back();
-    }
-};
-
+    const backLinkRef = useRef(location.state ?? "/");
 
     return (
        <div>
             {selectedMovie ? (
                 <div className={css.container}>
-                    <button className={css.goBackButton} onClick={handleGoBack}>Go back!</button>
+                    <Link to={backLinkRef.current}>
+                        <button className={css.goBackButton}>Go back!</button>
+                    </Link>
+                    
                     <div className={css.movieInfo}>
                         <div className={css.posterContainer}>
                             <img src={baseUrl + selectedMovie.poster_path} alt={selectedMovie.title} width={400} height={600} />
@@ -89,19 +66,20 @@ export default function MovieDetailsPage() {
                         <h3>Additional information</h3>
                         <ul>
                             <li onClick={handleToggleCast}>
-                                <NavLink to={showCast ? `/movies/${movieId}` : `/movies/${movieId}/cast`}>Cast</NavLink>
+                                <NavLink to={showCast ? `/movies/${id}` : `/movies/${id}/cast`}>Cast</NavLink>
                             </li>
                             <li onClick={handleToggleReviews}>
-                                <NavLink to={showReviews ? `/movies/${movieId}` : `/movies/${movieId}/reviews`}>Reviews</NavLink>
+                                <NavLink to={showReviews ? `/movies/${id}` : `/movies/${id}/reviews`}>Reviews</NavLink>
                             </li>
                         </ul>
                     </div>
                     <div className={css.line}></div>
-                    {showCast && <div><MovieCast movieId={movieId} /></div>}
-                    {showReviews && <div><MovieReviews movieId={movieId} /></div>}
                     <Outlet />
-                </div>)
-            : (<div><Loader /></div>)}
+                </div>
+            ) : (
+                <div><Loader /></div>
+            )}
         </div>
     );
 }
+

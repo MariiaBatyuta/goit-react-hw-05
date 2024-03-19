@@ -1,28 +1,28 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import css from './MoviesPage.module.css';
 import { getMovieSearch } from '../../components/axiosAPI';
 import MovieList from '../../components/MovieList/MovieList';
 import Loader from '../../components/Loader/Loader';
 
 export default function MoviesPage() {
-    const location = useLocation();
     const [searchMovie, setSearchMovie] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [isEmptyResult, setIsEmptyResult] = useState(false);
+    const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
-        const query = new URLSearchParams(location.search).get('query');
+        const query = searchParams.get('query');
         if (query) {
             setSearchQuery(query);
             handleSearch(query);
         }
-    }, [location.search]);
+    }, []);
 
     useEffect(() => {
         if (isEmptyResult) {
-            setSearchQuery(""); // Empty the input when no movies are found
+            setSearchQuery(""); 
         }
     }, [isEmptyResult]);
 
@@ -47,8 +47,7 @@ export default function MoviesPage() {
     const handleSearchSubmit = (event) => {
         event.preventDefault();
         if (searchQuery.trim() !== '') {
-            const url = `/movies/?query=${encodeURIComponent(searchQuery.trim())}`;
-            window.history.pushState({}, '', url);
+            setSearchParams({ query: searchQuery.trim() });
             handleSearch(searchQuery.trim());
         }
     };

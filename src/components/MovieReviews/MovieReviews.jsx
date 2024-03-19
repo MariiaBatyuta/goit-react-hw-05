@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
-import { urlSearchMovieReviews } from "../axiosAPI"
+import { urlSearchMovieReviews } from "../axiosAPI";
+import { useParams } from "react-router-dom";
 
-export default function MovieReviews({ movieId }) {
+export default function MovieReviews() {
     const [review, setReview] = useState(null);
+    const { id } = useParams();
 
     useEffect(() => {
         async function fetchMovieReviews() {
             try {
-                if (!movieId) return;
+                if (!id) return;
 
-                const movieData = await urlSearchMovieReviews(movieId);
+                const movieData = await urlSearchMovieReviews(id);
                 setReview(movieData);
             } catch (error) {
                 console.error(error);
             }
         }
         fetchMovieReviews();
-    }, [movieId]);
+    }, [id]);
 
     return (
     <>

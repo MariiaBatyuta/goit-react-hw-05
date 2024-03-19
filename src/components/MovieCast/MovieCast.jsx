@@ -1,26 +1,28 @@
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom"; 
 import { urlSearchMovieCast } from "../axiosAPI";
 import { TiUser } from "react-icons/ti";
 import css from "./MovieCast.module.css";
 
 const baseUrl = "https://image.tmdb.org/t/p/w500";
 
-export default function MovieCast({ movieId }) {
+export default function MovieCast() {
+    const { id } = useParams(); 
     const [castInfo, setCastInfo] = useState(null);
 
     useEffect(() => {
         async function fetchMovieCast() {
             try {
-                if (!movieId) return;
+                if (!id) return;
                 
-                const movieData = await urlSearchMovieCast(movieId);
+                const movieData = await urlSearchMovieCast(id);
                 setCastInfo(movieData);
             } catch (error) {
                 console.error(error);
             }
         }
         fetchMovieCast();
-    }, [movieId]);
+    }, [id]);
 
     return (
         <ul className={css.castList}>
@@ -35,7 +37,7 @@ export default function MovieCast({ movieId }) {
                                 height={100} 
                             />
                         ) : (
-                                <div className={css.placeholderIcon}>
+                            <div className={css.placeholderIcon}>
                                 <TiUser />
                             </div>
                         )}
