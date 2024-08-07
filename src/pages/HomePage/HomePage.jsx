@@ -7,7 +7,7 @@ import Loader from "../../components/Loader/Loader";
 export default function HomePage() {
 
     const [movies, setMovies] = useState([]);
-
+    const [error, setError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -15,10 +15,13 @@ export default function HomePage() {
             try {
                 const data = await getMovie();
                 setMovies(data.results);
+                setError(false);
             } catch (error) {
+                setError(true);
                 console.log(error);
             } finally {
                 setIsLoading(false);
+                setError(false);
             }
         }
         getData();
@@ -26,11 +29,11 @@ export default function HomePage() {
 
     return (
         <div className={css.movieContainer}>
-            <h2 className={css.header}>Trending today</h2>
-
             {isLoading && <Loader />}
+
+            {!isLoading && <h2 className={css.header}>Trending today</h2>}
             
-            {!isLoading && <MovieList movies={movies} />}
+            {!error && <MovieList movies={movies} />}
         </div>
     );
 }

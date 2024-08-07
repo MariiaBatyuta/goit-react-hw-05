@@ -1,13 +1,19 @@
 .list {
-    margin-left: 8px;
-    text-align: left;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
     list-style: none;
-    padding-left: 0;
+    padding: 0;
+    margin: 20px;
 }
 
-.list:hover{
-    cursor: pointer;
-    text-decoration: underline;
-    color: red;
-    text-shadow: 0 1px 2px gray;
+@media (max-width: 480px) {
+    .list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        list-style: none;
+        padding: 0;
+        margin: 20px;
+    }
 }

@@ -7,7 +7,7 @@
 .header {
     margin: 0;
     margin-left: 8px;
-    text-align: left;
+    text-align: center;
 }
 
 .list{
@@ -16,3 +16,4 @@
     list-style: none;
     padding-left: 0;
 }
+

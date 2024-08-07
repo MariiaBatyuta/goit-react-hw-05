@@ -1,6 +1,6 @@
 .nav {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     box-sizing: border-box;
     gap: 24px;
     position: fixed;
@@ -21,10 +21,12 @@
 
 .page:hover {
     color: red;
+    font-size: 16px;
     text-shadow: 0 2px 4px black;
+    transition: text-shadow 0.3s;
 }
 
 .isActive {
     color: red;
+    text-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
-

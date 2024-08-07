@@ -3,6 +3,7 @@
     flex-wrap: wrap;
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .castItem {
@@ -22,6 +23,7 @@
     color: black;
     font-size: 75px;
     height: 100px;
+    border-radius: 12px;
 }
 
 .actorImage img,
@@ -38,4 +40,17 @@
     text-align: center;
     color: black;
     font-size: 12px;
+}
+
+@media (max-width: 480px) {
+    .castItem{
+        justify-content: center;
+        align-items: center;
+        width: calc(43% - 20px);
+        margin: 10px;
+        padding: 10px;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        background-color: #fff;
+    }
 }
