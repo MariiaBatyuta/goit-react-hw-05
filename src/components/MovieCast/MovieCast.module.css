@@ -1,6 +1,6 @@
 .castList {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     gap: 20px;
     list-style: none;
     padding: 0;
@@ -54,16 +54,4 @@
     color: black;
     font-size: 14px;
     flex-grow: 1;
-}
-
-@media (max-width: 768px) {
-    .castList {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    }
-}
-
-@media (max-width: 480px) {
-    .castList {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    }
 }

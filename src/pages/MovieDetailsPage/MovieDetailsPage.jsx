@@ -12,8 +12,7 @@ export default function MovieDetailsPage() {
     const [activeSection, setActiveSection] = useState(null);
     const location = useLocation();
 
-    const castRef = useRef(null);
-    const reviewsRef = useRef(null);
+    const infoRef = useRef(null);
 
     useEffect(() => {
         async function fetchMovie() {
@@ -39,11 +38,8 @@ export default function MovieDetailsPage() {
             }
         };
 
-        if (activeSection === 'cast') {
-            scrollToRef(castRef);
-        } else if (activeSection === 'reviews') {
-            scrollToRef(reviewsRef);
-        }
+        if (activeSection === 'cast' || activeSection === 'reviews') scrollToRef(infoRef);
+
     }, [activeSection]);
 
     const handleToggleSection = (section) => {
@@ -86,15 +82,16 @@ export default function MovieDetailsPage() {
                     <div className={css.details}>
                         <h3>Additional information</h3>
                         <div className={css.infoPart}>
-                            <NavLink ref={castRef} to={activeSection === 'cast' ? `/movies/${id}` : `/movies/${id}/cast`} className={css.navLink} onClick={() => handleToggleSection('cast')}>
+                            <NavLink to={activeSection === 'cast' ? `/movies/${id}` : `/movies/${id}/cast`} className={css.navLink} onClick={() => handleToggleSection('cast')}>
                                 Cast
                             </NavLink>
-                            <NavLink ref={reviewsRef} to={activeSection === 'reviews' ? `/movies/${id}` : `/movies/${id}/reviews`} className={css.navLink} onClick={() => handleToggleSection('reviews')}>
+                            <NavLink to={activeSection === 'reviews' ? `/movies/${id}` : `/movies/${id}/reviews`} className={css.navLink} onClick={() => handleToggleSection('reviews')}>
                                 Reviews
                             </NavLink>
                         </div>
                     </div>
                     <div className={css.line}></div>
+                    <div ref={infoRef}></div>
                     <Outlet />
                 </div>
             ) : (
