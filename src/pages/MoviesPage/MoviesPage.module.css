@@ -2,10 +2,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
     margin-top: 60px;
 }
 
@@ -52,19 +48,8 @@
 }
 
 @media (max-width: 480px) {
-    .searchForm {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 80%;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        margin-top: 60px;
-    }
 
     .resultContainer ul {
-        margin-top: 80px;
         grid-template-columns: repeat(2, 1fr);
         gap: 40px;
     }

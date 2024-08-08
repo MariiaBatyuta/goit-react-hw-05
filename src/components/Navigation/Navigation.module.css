@@ -1,15 +1,14 @@
 .nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     box-sizing: border-box;
-    gap: 24px;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     padding: 12px;
     background-color: white;
-    border-bottom: 1px solid grey;
+    border-bottom: 2px solid grey;
     box-shadow: 0 4px 8px rgba(94, 93, 93, 0.2);
     margin-bottom: 8px;
     z-index: 100;

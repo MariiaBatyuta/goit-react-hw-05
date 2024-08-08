@@ -26,30 +26,32 @@ export default function MovieCast() {
 
     return (
         <ul className={css.castList}>
-            {castInfo && castInfo.cast.map((actor) => (
-                <li key={actor.id} className={css.castItem}>
-                    <div className={css.actorImage}>
-                        {actor.profile_path ? (
-                            <img 
-                                src={baseUrl + actor.profile_path} 
-                                alt={actor.original_name} 
-                                width={100} 
-                                height={100} 
-                            />
-                        ) : (
-                            <div className={css.placeholderIcon}>
-                                <TiUser />
-                            </div>
-                        )}
-                    </div>
-                    <div className={css.actorDetails}>
-                        <p>{actor.original_name}</p>
-                        <p>
-                            <b>Character: </b><br />
-                            {actor.character}
-                        </p>
-                    </div>
-                </li>
+            {castInfo && castInfo.cast && castInfo.cast.length === 0 
+                ? (<p>We don&apos;t have any information about this movie cast</p>)
+                : (castInfo && castInfo.cast.map((actor) => (
+                    <li key={actor.id} className={css.castItem}>
+                        <div className={css.actorImage}>
+                            {actor.profile_path ? (
+                                <img 
+                                    src={baseUrl + actor.profile_path} 
+                                    alt={actor.original_name} 
+                                    width={100} 
+                                    height={100} 
+                                />
+                            ) : (
+                                <div className={css.placeholderIcon}>
+                                    <TiUser />
+                                </div>
+                            )}
+                        </div>
+                        <div className={css.actorDetails}>
+                            <p>{actor.original_name}</p>
+                            <p>
+                                <b>Character: </b><br />
+                                {actor.character}
+                            </p>
+                        </div>
+                    </li>)
             ))}
         </ul>
     );

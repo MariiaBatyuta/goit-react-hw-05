@@ -35,7 +35,7 @@ export default function MovieDetailsPage() {
             if (ref.current) {
                 setTimeout(() => {
                     ref.current.scrollIntoView({ behavior: 'smooth' });
-                }, 100); // Невелика затримка для оновлення DOM
+                }, 100); 
             }
         };
 
@@ -66,7 +66,12 @@ export default function MovieDetailsPage() {
 
                     <div className={css.movieInfo}>
                         <div className={css.posterContainer}>
-                            <img src={baseUrl + selectedMovie.poster_path} alt={selectedMovie.title} width={400} height={600} />
+                            <img 
+                                src={selectedMovie.poster_path ? baseUrl + selectedMovie.poster_path : "https://www.geemagic.com/wp-content/uploads/2016/04/The-Movie-Product.png"} 
+                                alt={selectedMovie.title} 
+                                width={400} 
+                                height={600} 
+                            />
                         </div>
                         <div className={css.details}>
                             <h3>{selectedMovie.original_title}</h3>
@@ -80,18 +85,14 @@ export default function MovieDetailsPage() {
                     <div className={css.line}></div>
                     <div className={css.details}>
                         <h3>Additional information</h3>
-                        <ul className={css.infoPart}>
-                            <li onClick={() => handleToggleSection('cast')} ref={castRef} className={css.navLink}>
-                                <NavLink to={activeSection === 'cast' ? `/movies/${id}` : `/movies/${id}/cast`} className={css.navLink}>
-                                    Cast
-                                </NavLink>
-                            </li>
-                            <li onClick={() => handleToggleSection('reviews')} ref={reviewsRef} className={css.navLink}>
-                                <NavLink to={activeSection === 'reviews' ? `/movies/${id}` : `/movies/${id}/reviews`} className={css.navLink}>
-                                    Reviews
-                                </NavLink>
-                            </li>
-                        </ul>
+                        <div className={css.infoPart}>
+                            <NavLink ref={castRef} to={activeSection === 'cast' ? `/movies/${id}` : `/movies/${id}/cast`} className={css.navLink} onClick={() => handleToggleSection('cast')}>
+                                Cast
+                            </NavLink>
+                            <NavLink ref={reviewsRef} to={activeSection === 'reviews' ? `/movies/${id}` : `/movies/${id}/reviews`} className={css.navLink} onClick={() => handleToggleSection('reviews')}>
+                                Reviews
+                            </NavLink>
+                        </div>
                     </div>
                     <div className={css.line}></div>
                     <Outlet />
